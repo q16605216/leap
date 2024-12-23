@@ -153,6 +153,15 @@ namespace LLVMJIT
 			likelyTrueBranchWeights = llvm::MDTuple::getDistinct(context,{llvm::MDString::get(context,"branch_weights"),i32MaxAsMetadata,zeroAsMetadata});
 
 		}
+                ~EmitModuleContext()
+                {
+			if llvmModule != NULL {
+				delete llvmModule;
+				llvmModule = NULL;
+			}
+                }                
+
+
 		llvm::Module* emit();
 	};
 
